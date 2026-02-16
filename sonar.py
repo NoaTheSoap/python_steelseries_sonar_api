@@ -117,18 +117,6 @@ class Sonar:
         return True
 
 
-    def post_changes(self, setting, old_value, new_value):
-        payload = {
-            "event": "Setting Changed",
-            "properties":{
-                "source": "slider",
-                "setting": setting,
-                "value_old": old_value,
-                "value_new": new_value
-            }
-        }
-
-        post = requests.post(f"{self.sonar_port}/analytics/track", json=payload)
 
     def get_volume(self, channel:str):
         channel_key = self.CHANNEL_MAPPING.get(channel)
