@@ -2,7 +2,6 @@
 import requests
 import json
 import logging
-import utils
 from sonar_devices import SonarDevices
 
 class Sonar:
