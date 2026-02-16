@@ -1,7 +1,6 @@
 ﻿import os
 import requests
 import json
-import logging
 from exceptions import *
 from sonar_devices import SonarDevices
 
@@ -73,7 +72,7 @@ class Sonar:
         if volume < 0 or volume > 1:
             raise InvalidVolume(volume)
 
-        self._put(f"volumeSettings/classic/{channel_key}/Volume/{str(volume)}")
+        self._put(f"volumeSettings/classic/{channel_key}/Volume/{volume:.2f}")
 
     def mute_channel(self, channel, mute:bool):
         if not channel in self.channel_names:
@@ -105,6 +104,7 @@ class Sonar:
             raise InvalidChannel(channel)
 
         return self._get("volumeSettings/classic")["devices"][channel_key]["classic"]["volume"]
+
 
 
     def _get(self, endpoint):
