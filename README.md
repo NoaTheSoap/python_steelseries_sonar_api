@@ -44,11 +44,15 @@ Channels: `master` `game` `chat` `media` `aux` `mic`
 # Set the Game channel volume to 50%
 sonar.set_volume("game", 0.5)
 
+# Get the current volume for Chat
+sonar.get_volume("chat")
+
 # Mute the Media channel
 sonar.mute_channel("media", True)
 
-# Get the current volume for Chat
-sonar.get_volume("chat")
+# Get mute status
+sonar.get_mute("media")
+
 ```
 
 ### Managing Devices
