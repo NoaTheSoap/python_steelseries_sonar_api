@@ -5,7 +5,6 @@ from .exceptions import *
 from .sonar_devices import SonarDevices
 
 class Sonar:
-    channel_names = ["Master", "game", "chat", "media", "aux"]
 
     CHANNEL_MAPPING = {
         "master": "Master",
@@ -82,7 +81,8 @@ class Sonar:
         self._put(f"volumeSettings/classic/{channel_key}/Volume/{volume:.2f}")
 
     def mute_channel(self, channel, mute:bool):
-        if not channel in self.channel_names:
+        channel_key = self.CHANNEL_MAPPING.get(channel)
+        if not channel_key:
             raise InvalidChannel(channel)
 
         if channel == "chat":

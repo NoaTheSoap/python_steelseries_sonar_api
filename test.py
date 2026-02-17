@@ -32,4 +32,4 @@ def change_devices():
 
 if __name__ == '__main__':
     test()
-    change_devices()
+    #change_devices()

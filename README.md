@@ -33,8 +33,8 @@ sonar = Sonar()
 ```
 
 ### Volume & Muting
-Volume values are floats between 0.0 and 1.0.
-
+Volume values are floats between 0.0 and 1.0.<br>
+Channels: `master`, `game`, `chat`, `media`, `aux`
 ```python
 # Set the Game channel volume to 50%
 sonar.set_volume("game", 0.5)
@@ -47,7 +47,8 @@ sonar.get_volume("media")
 ```
 
 ### Managing Devices
-Setting output device requires `channel` to change the output device for and `deviceID`.
+Setting output device requires `channel` to change the output device for and `deviceID`<br>
+Channels: `game`, `chat`, `media`, `aux`
 
 ```python
 # List all active devices
@@ -72,3 +73,4 @@ print(devices[0]["id"])
 # Set output to first device found
 sonar.set_output_device("game", devices[0]["id"])
 ```
+
