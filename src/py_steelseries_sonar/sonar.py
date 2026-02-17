@@ -1,8 +1,8 @@
 ﻿import os
 import requests
 import json
-from exceptions import *
-from sonar_devices import SonarDevices
+from .exceptions import *
+from .sonar_devices import SonarDevices
 
 class Sonar:
     channel_names = ["Master", "game", "chat", "media", "aux"]
@@ -18,6 +18,9 @@ class Sonar:
     def __init__(self, core_props_path = None):
         requests.packages.urllib3.disable_warnings()
 
+        self.session = requests.Session()
+        self.session.verify = False
+
         # If coreProps.json is not overridden use standard path
         if core_props_path is None:
             core_props_path = os.path.join(os.environ['ProgramData'], 'SteelSeries', 'SteelSeries Engine 3','coreProps.json')
@@ -27,13 +30,17 @@ class Sonar:
         self.base_port = None
         self.sonar_port = None
 
-        self.get_base_port()
-        self.get_sonar_port()
+        self._get_base_port()
+        self._get_sonar_port()
 
         if self.sonar_port:
-            self.devices = SonarDevices(self.sonar_port)
+            self.devices = SonarDevices(self)
 
-    def get_base_port(self):
+    def refresh_ports(self):
+        self._get_base_port()
+        self._get_sonar_port()
+
+    def _get_base_port(self):
         # Use ggEncryptedAddress: C:\ProgramData\SteelSeries\SteelSeries Engine 3\coreProps.json
         if not os.path.exists(self.core_props_path):
             raise CorePropsNotFoundError(self.core_props_path)
@@ -42,7 +49,7 @@ class Sonar:
             self.base_port = core_props['ggEncryptedAddress']
 
 
-    def get_sonar_port(self):
+    def _get_sonar_port(self):
         data = requests.get("https://"+self.base_port+ "/subApps", verify=False)
         if data.status_code != 200:
             raise SonarConnectionError(self.base_port)
@@ -109,7 +116,7 @@ class Sonar:
 
     def _get(self, endpoint):
         try:
-            response = requests.get(f"{self.sonar_port}/{endpoint}", timeout=2)
+            response = self.session.get(f"{self.sonar_port}/{endpoint}", timeout=2)
         except requests.exceptions.RequestException as e:
             raise SonarConnectionError(self.sonar_port) from e
 
@@ -119,9 +126,10 @@ class Sonar:
 
     def _put(self, endpoint):
         try:
-            response = requests.put(f"{self.sonar_port}/{endpoint}", timeout=2)
+            response = self.session.put(f"{self.sonar_port}/{endpoint}", timeout=2)
         except requests.exceptions.RequestException as e:
             raise SonarConnectionError(self.sonar_port) from e
 
         if not response.ok:
             raise SonarNotAccessible(response.status_code)
+

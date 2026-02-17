@@ -1,10 +1,6 @@
-﻿import requests
-import json
-
-
-class SonarDevices:
-    def __init__(self, sonar_port):
-        self.sonar_port = sonar_port
+﻿class SonarDevices:
+    def __init__(self, sonar):
+        self.sonar = sonar
 
     # Returns list[dict[str, str]] of all active output devices available in Sonar
     def get_output_devices(self):
@@ -35,4 +31,4 @@ class SonarDevices:
 
 
     def get_devices(self):
-        return requests.get(f"{self.sonar_port}/audioDevices").json()
+        return self.sonar._get("audioDevices")

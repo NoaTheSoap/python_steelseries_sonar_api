@@ -12,7 +12,7 @@ class SonarConnectionError(SonarError):
 
 class SonarNotEnabled(SonarError):
     def __init__(self):
-        super().__init__(f"Sonar is not enabled")
+        super().__init__(f"Sonar is not enabled, please enable it in SteelSeries GG settings")
 
 class SonarNotReady(SonarError):
     def __init__(self):
@@ -24,7 +24,7 @@ class SonarNotRunning(SonarError):
 
 class SonarNotAccessible(SonarError):
     def __init__(self, status_code):
-        super().__init__(f"Sonar is not accessible: {status_code}")
+        super().__init__(f"Sonar is not accessible or received invalid values: {status_code}")
 
 class InvalidChannel(SonarError):
     def __init__(self, channel):
