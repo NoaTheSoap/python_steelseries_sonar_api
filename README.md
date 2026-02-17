@@ -1,7 +1,7 @@
 ﻿# Python Sonar Controller
-A python library to control SteelSeries Sonar<br>
+A python package to control SteelSeries Sonar<br>
 
-The project has not been made for or tested with streamer mode.
+The package has not been made for or tested with streamer mode.
 
 ## Description
 
@@ -25,7 +25,7 @@ pip install git+https://github.com/NoaTheSoap/python_steelseries_sonar_api
 ## Usage
 
 ### Initialization
-The library automatically looks for `coreProps.json` in the default SteelSeries path.
+The package automatically looks for `coreProps.json` in the default SteelSeries path.
 
 ```python
 from py_steelseries_sonar import Sonar
