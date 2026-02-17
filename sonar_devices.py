@@ -6,8 +6,6 @@ class SonarDevices:
     def __init__(self, sonar_port):
         self.sonar_port = sonar_port
 
-    # ----- Output ----- #
-
     # Returns list[dict[str, str]] of all active output devices available in Sonar
     def get_output_devices(self):
         filtered= [{"name": d["friendlyName"], "id": d["id"]}
@@ -21,7 +19,6 @@ class SonarDevices:
         for device in self.get_output_devices():
             print(device["name"], device["id"])
 
-    # ----- Input ----- #
 
     # Returns list[dict[str, str]] of all active input devices available in Sonar
     def get_input_devices(self):
