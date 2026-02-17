@@ -31,6 +31,7 @@ def main():
         print("Game channel muted")
         sonar.mute_channel("game", False)
         print("Game channel unmuted")
+        print(sonar.get_mute("aux"))
 
         # Test changing output device (choose first device if available)
         output_devices = sonar.devices.get_output_devices()

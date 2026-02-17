@@ -119,6 +119,18 @@ class Sonar:
         else:
             return response["devices"][channel_key]["classic"]["volume"]
 
+    def get_mute(self, channel:str):
+        channel_key = self.CHANNEL_MAPPING.get(channel)
+        if not channel_key:
+            raise InvalidChannel(channel)
+
+        response = self._get("volumeSettings/classic")
+        if channel_key == "Master":
+            return response["masters"]["classic"]["muted"]
+        else:
+            return response["devices"][channel_key]["classic"]["muted"]
+
+
 
 
     def _get(self, endpoint):
