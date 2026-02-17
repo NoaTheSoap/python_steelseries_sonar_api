@@ -33,7 +33,7 @@ from py_steelseries_sonar import Sonar
 # Initialize Sonar connection
 sonar = Sonar()
 
-# Override corePros.json directory
+# Override coreProps.json directory
 sonar = Sonar("My\\Sonar\\Directory\\coreProps.json")
 ```
 
