@@ -30,6 +30,9 @@ from py_steelseries_sonar import Sonar
 
 # Initialize Sonar connection
 sonar = Sonar()
+
+# Override corePros.json directory
+sonar = Sonar("My\\Sonar\\Directory\\coreProps.json")
 ```
 
 ### Volume & Muting
@@ -43,7 +46,7 @@ sonar.set_volume("game", 0.5)
 sonar.mute_channel("media", True)
 
 # Get the current volume for Chat
-sonar.get_volume("media")
+sonar.get_volume("chat")
 ```
 
 ### Managing Devices

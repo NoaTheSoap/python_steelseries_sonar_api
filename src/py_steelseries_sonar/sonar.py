@@ -11,7 +11,8 @@ class Sonar:
         "game": "game",
         "chat": "chatRender",
         "media": "media",
-        "aux": "aux"
+        "aux": "aux",
+        "mic": "chatCapture"
     }
 
     def __init__(self, core_props_path = None):
@@ -88,7 +89,7 @@ class Sonar:
         if channel == "chat":
             channel = "chatRender"
 
-        self._put(f"volumeSettings/classic/{channel}/Mute/{str(mute).lower()}")
+        self._put(f"volumeSettings/classic/{channel_key}/Mute/{str(mute).lower()}")
 
 
     def set_output_device(self, channel ,device_id):
@@ -98,8 +99,8 @@ class Sonar:
 
         if channel_key == "chatRender":
             channel_key = "chat"
-        if channel == "master":
-            raise InvalidChannel("master")
+        if channel == "master" or channel == "mic":
+            raise InvalidChannel(channel)
         self._put(f"classicRedirections/{channel_key}/deviceId/{device_id}")
 
 

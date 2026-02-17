@@ -13,23 +13,26 @@ def test():
     print("List Output devices")
     sonar.devices.list_output_devices()
 
+    print("Muting input device")
+
     print("Muting channels")
-    sonar.mute_channel(channel, False)
+    sonar.mute_channel("mic", False)
 
     print("Set volume")
-    sonar.set_volume(channel, 1)
+    sonar.set_volume("mic", 0.5)
 
     print("Get volume")
-    sonar.get_volume(channel)
+    print(sonar.get_volume("mic"))
+
 
 def change_devices():
+    print("Set output device")
+    sonar.set_output_device("mic", output_device)
+
     print("Set input device")
     sonar.set_input_device(input_device)
-
-    print("Set output device")
-    sonar.set_output_device("media", output_device)
 
 
 if __name__ == '__main__':
     test()
-    #change_devices()
+    change_devices()
