@@ -7,7 +7,7 @@ The project has not been made for or tested with streamer mode.
 
 This Python library allows you to control SteelSeries Sonar programmatically. With it, you can:
 
-- Adjust volume for different channels (`master`, `game`, `chat`, `media`, `aux`)
+- Adjust volume for different channels (`master`, `game`, `chat`, `media`, `aux`, `mic`)
 - Mute or unmute channels
 - Change input and output devices
 - List active audio devices
