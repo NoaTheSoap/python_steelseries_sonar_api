@@ -113,7 +113,11 @@ class Sonar:
         if not channel_key:
             raise InvalidChannel(channel)
 
-        return self._get("volumeSettings/classic")["devices"][channel_key]["classic"]["volume"]
+        response = self._get("volumeSettings/classic")
+        if channel_key == "Master":
+            return response["masters"]["classic"]["volume"]
+        else:
+            return response["devices"][channel_key]["classic"]["volume"]
 
 
 

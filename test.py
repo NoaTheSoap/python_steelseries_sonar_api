@@ -1,38 +1,56 @@
-﻿from src.py_steelseries_sonar.sonar import Sonar
-from src.py_steelseries_sonar.sonar_devices import SonarDevices
-
-channel = "media"
-
-output_device = ""
-input_device = "{0.0.1.00000000}.{715e2dd1-9656-4c68-8114-fff9d1d9727b}"
-
-sonar = Sonar()
-def test():
-    print("List Input devices")
-    sonar.devices.list_input_devices()
-    print("List Output devices")
-    sonar.devices.list_output_devices()
-
-    print("Muting input device")
-
-    print("Muting channels")
-    sonar.mute_channel("mic", False)
-
-    print("Set volume")
-    sonar.set_volume("mic", 0.5)
-
-    print("Get volume")
-    print(sonar.get_volume("mic"))
+﻿from src.py_steelseries_sonar import Sonar
 
 
-def change_devices():
-    print("Set output device")
-    sonar.set_output_device("mic", output_device)
+def main():
+    try:
+        # Initialize Sonar
+        sonar = Sonar()
+        print(sonar.sonar_port)
+        print("Sonar initialized successfully!")
 
-    print("Set input device")
-    sonar.set_input_device(input_device)
+        # List available output devices
+        print("\nOutput devices:")
+        for device in sonar.devices.get_output_devices():
+            print(device["name"], device["id"])
+
+        # List available input devices
+        print("\nInput devices:")
+        for device in sonar.devices.get_input_devices():
+            print(device["name"], device["id"])
+
+        # Test setting volume
+        print("\nTesting volume set/get:")
+        sonar.set_volume("master", 0.5)
+        print("Master volume set to 0.5")
+        vol = sonar.get_volume("chat")
+        print(f"Master volume read back: {vol}")
+
+        # Test muting a channel
+        print("\nTesting mute:")
+        sonar.mute_channel("game", True)
+        print("Game channel muted")
+        sonar.mute_channel("game", False)
+        print("Game channel unmuted")
+
+        # Test changing output device (choose first device if available)
+        output_devices = sonar.devices.get_output_devices()
+        if output_devices:
+            device_id = output_devices[0]["id"]
+            sonar.set_output_device("game", device_id)
+            print(f"Game output device set to {output_devices[0]['name']}")
+
+        # Test changing input device (choose first device if available)
+        input_devices = sonar.devices.get_input_devices()
+        if input_devices:
+            device_id = input_devices[0]["id"]
+            sonar.set_input_device(device_id)
+            print(f"Microphone input device set to {input_devices[0]['name']}")
+
+        print("\nAll tests completed successfully!")
+
+    except Exception as e:
+        print("Test failed with exception:", e)
 
 
-if __name__ == '__main__':
-    test()
-    change_devices()
+if __name__ == "__main__":
+    main()

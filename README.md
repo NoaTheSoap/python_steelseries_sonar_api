@@ -1,5 +1,7 @@
 ﻿# Python Sonar Controller
-A python library to control SteelSeries Sonar
+A python library to control SteelSeries Sonar<br>
+
+The project has not been made for or tested with streamer mode.
 
 ## Description
 
@@ -37,7 +39,7 @@ sonar = Sonar("My\\Sonar\\Directory\\coreProps.json")
 
 ### Volume & Muting
 Volume values are floats between 0.0 and 1.0.<br>
-Channels: `master`, `game`, `chat`, `media`, `aux`
+Channels: `master` `game` `chat` `media` `aux` `mic`
 ```python
 # Set the Game channel volume to 50%
 sonar.set_volume("game", 0.5)
@@ -51,7 +53,7 @@ sonar.get_volume("chat")
 
 ### Managing Devices
 Setting output device requires `channel` to change the output device for and `deviceID`<br>
-Channels: `game`, `chat`, `media`, `aux`
+Channels: `game` `chat` `media` `aux`
 
 ```python
 # List all active devices
