@@ -1,6 +1,4 @@
-﻿from test import sonar
-
-# Python Sonar Controller
+﻿# Python Sonar Controller
 A python library to control SteelSeries Sonar
 
 ## Description
@@ -49,7 +47,7 @@ sonar.get_volume("media")
 ```
 
 ### Managing Devices
-The library will list all active devices found by SteelSeries Sonar
+Setting output device requires `channel` to change the output device for and `deviceID`.
 
 ```python
 # List all active devices
@@ -61,10 +59,16 @@ devices = sonar.devices.get_output_devices()
 devices = sonar.devices.get_input_devices()
 
 # Set input device
+sonar.set_input_device("{0.0.1.00000000}.{0875f144-5e02-4526-8fc2-223f9b4878ca}")
 
+# Set output device
+sonar.set_output_device("game", "{0.0.1.00000000}.{0875f144-5e02-4526-8fc2-223f9b4878ca}")
 
-# Getting device name and ID from first device found
+# Getting device name and ID from the first output device found
 devices = sonar.devices.get_output_devices()
 print(devices[0]["name"])
 print(devices[0]["id"])
+
+# Set output to first device found
+sonar.set_output_device("game", devices[0]["id"])
 ```
