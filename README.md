@@ -17,7 +17,7 @@ This Python library allows you to control SteelSeries Sonar programmatically. Wi
 1. Clone the repository:
 
 ```bash
-pip install git+https://github.com/your-username/python-sonar-controller.git
+pip install git+https://github.com/NoaTheSoap/python_steelseries_sonar_api
 ```
 
 ## Usage
