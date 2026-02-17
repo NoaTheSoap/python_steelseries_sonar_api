@@ -98,6 +98,8 @@ class Sonar:
 
         if channel_key == "chatRender":
             channel_key = "chat"
+        if channel == "master":
+            raise InvalidChannel("master")
         self._put(f"classicRedirections/{channel_key}/deviceId/{device_id}")
 
 
