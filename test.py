@@ -27,7 +27,7 @@ def change_devices():
     sonar.set_input_device(input_device)
 
     print("Set output device")
-    sonar.set_output_device(output_device)
+    sonar.set_output_device("media", output_device)
 
 
 if __name__ == '__main__':
