@@ -56,7 +56,7 @@ sonar.get_mute("media")
 ```
 
 ### Managing Devices
-Setting output device requires `channel` to change the output device for and `deviceID`<br>
+Setting output device requires `channel` and  `deviceID`<br>
 Channels: `game` `chat` `media` `aux`
 
 ```python
